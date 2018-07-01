@@ -3,28 +3,31 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
+  output: {
+    publicPath: '/',
+  },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
         test: /\.css$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' }
-        ]
-      }
-    ]
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+      },
+    ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({ template: './src/index.html' })
-  ],
+  plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })],
+  devtool: 'cheap-module-eval-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'src'),
     compress: true,
-    port: 9000
-  }
+    historyApiFallback: true,
+    port: 9000,
+    proxy: {
+      '/api': 'http://localhost:8000',
+    },
+  },
 };
