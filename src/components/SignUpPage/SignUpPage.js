@@ -1,10 +1,10 @@
 import React from 'react';
-import AuthForm from '../AuthForm/AuthForm';
+import SignUpForm from '../SignUpForm/SignUpForm';
 
 const SignUpPage = () => (
   <div>
     <h4>Sign up</h4>
-    <AuthForm />
+    <SignUpForm />
   </div>
 );
 
