@@ -13,7 +13,9 @@ const loadItemsSuccess = items => dispatch =>
 export const loadItems = ({ nextPageUrl, filterPhrase = '' }) => (dispatch) => {
   dispatch(loadItemsRequest());
   const url = nextPageUrl || `${baseUrl}/api/books/?filter=${filterPhrase}`;
-  return fetch(url)
+  return fetch(url, {
+    headers: { Authorization: `Token ${localStorage.getItem('user')}` },
+  })
     .then(response => response.json())
     .then((items) => {
       dispatch(loadItemsSuccess(items));
@@ -22,7 +24,9 @@ export const loadItems = ({ nextPageUrl, filterPhrase = '' }) => (dispatch) => {
 };
 export const loadItem = slug => (dispatch) => {
   dispatch(loadItemsRequest());
-  fetch(`${baseUrl}/api/books/${slug}`)
+  fetch(`${baseUrl}/api/books/${slug}`, {
+    headers: { Authorization: `Token ${localStorage.getItem('user')}` },
+  })
     .then(response => response.json())
     .then(book => dispatch({ type: booksTypes.LOAD_ITEM, payload: book }));
 };
