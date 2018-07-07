@@ -13,7 +13,7 @@ export const signUp = ({ username, password }) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password }),
   };
-  return fetch(`${baseUrl}register/`, requestOptions).then(handleResponse);
+  return fetch(`${baseUrl}/api/users/`, requestOptions).then(handleResponse);
 };
 
 export const login = ({ username, password }) => {
